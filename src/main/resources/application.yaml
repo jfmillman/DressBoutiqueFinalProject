@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    password: dress
+    username: dress
+    url: jdbc:mysql://localhost:3306/dress
+
+logging:
+  level:
+    root: warn
+    '[com.promineotech]': debug
