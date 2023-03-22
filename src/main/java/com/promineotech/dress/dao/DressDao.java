@@ -34,7 +34,7 @@ public interface DressDao {
    * @param dressStyle
    * @return
    */
-  Optional<Dress> updateDressPrice(String dressID, String dressStyle, BigDecimal newPrice);
+  Optional<Dress> updateDressPrice(String dressID, Dress newPrice);
 
   /**
    * @param dressPK

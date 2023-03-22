@@ -32,6 +32,7 @@ public class DefaultColorDao implements ColorDao {
         + "SELECT * "
         + "FROM color "
         + "WHERE color_pk = :color_pk";
+        
     //@formatter:on
     
     Map<String, Object> params = new HashMap<>();

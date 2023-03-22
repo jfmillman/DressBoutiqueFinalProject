@@ -172,29 +172,19 @@ public interface DressController {
               allowEmptyValue = false, 
               required = true, 
               description = "The dressID (i.e., 'Venice')"), 
-          @Parameter(
-              name = "dressStyle",
-              allowEmptyValue = false,
-              required = true,
-              description = "The dressStyle (i.e., 'strapless')"),
-          @Parameter (
-              name = "newPrice",
-              allowEmptyValue = false, 
-              required = true, 
-              description = "The newPrice"
-              )
+      
      }
   )
   //@formatter:on
      
- //This will update the price of an existing dress
+ //This will update the price of a dress
   @PutMapping 
   @ResponseStatus(code = HttpStatus.OK)
   Optional<Dress> updateDressPrice(
       @RequestParam (required = true)
       String dressID,
-      @RequestParam (required = true)
-      String dressStyle);
+      @RequestParam (required = false)
+      Dress newPrice);
   
   @Operation(
       summary = "Delete a dress",

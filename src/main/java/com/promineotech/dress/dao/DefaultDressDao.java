@@ -65,15 +65,16 @@ public class DefaultDressDao implements DressDao{
     //@formatter:off
     String sql = ""
         + "INSERT INTO dress ("
-        + "dress_id, dress_style, price"
+        + "dress_id, dress_style, price, customer_fk"
         + ") VALUES ("
-        + ":dress_id, :dress_style, :price)";
+        + ":dress_id, :dress_style, :price, :customer_fk)";
     //@formatter:on
     
     Map<String, Object> params = new HashMap<>();
     params.put("dress_id", dressID);
     params.put("dress_style", dressStyle);
     params.put("price", price);
+    
   
     
     jdbcTemplate.update(sql, params);
@@ -82,22 +83,21 @@ public class DefaultDressDao implements DressDao{
 
   //Put method for updating the dress price
   @Override
-  public Optional<Dress> updateDressPrice(String dressID, String dressStyle, BigDecimal newPrice) {
-    log.info("DAO: dressID={}, dressStyle={}, newPrice{}", dressID, dressStyle, newPrice);
+  public Optional<Dress> updateDressPrice(String dressID, Dress newPrice) {
+    log.info("DAO: dressID={}, price{}", dressID, newPrice);
     
     //formatter:off
     String sql = ""
-        + "UPDATE dress SET price = :new_price "
-        + "WHERE dress_id = :dress_id AND dress_style = :dress_style";
+        + "UPDATE dress SET price = :price "
+        + "WHERE dress_id = :dress_id";
     //formatter:on
     
     Map<String, Object> params = new HashMap<>();
     params.put("dress_id", dressID);
-    params.put("dress_style", dressStyle);
     params.put("new_price", newPrice);
     
     jdbcTemplate.update(sql, params);
-    return Optional.ofNullable(Dress.builder().dressId(dressID).dressStyle(dressStyle).price(newPrice).build());
+    return Optional.ofNullable(Dress.builder().dressId(dressID).price(newPrice).build());
   }
 
   //Delete method to delete a dress
@@ -106,7 +106,7 @@ public class DefaultDressDao implements DressDao{
     //@formatter:off
     String sql = ""
         + "DELETE FROM dress WHERE "
-        + "dress_pk = :dress";
+        + "dress_pk = :dress_pk";
     //@formatter:on
     
     Map <String, Object> params = new HashMap<>();

@@ -39,10 +39,10 @@ public class BasicDressController implements DressController {
 
   //Put (update dress price)
   @Override
-  public Optional<Dress> updateDressPrice(String dressID, String dressStyle, BigDecimal newPrice) {
-    log.info("dressID={}, dressStyle={}, newPrice={}", dressID, dressStyle, newPrice);
+  public Optional<Dress> updateDressPrice(String dressID, Dress newPrice) {
+    log.info("dressID={}, newPrice={}", dressID, newPrice);
     
-    return dressService.updateDressPrice(dressID, dressStyle, newPrice);
+    return dressService.updateDressPrice(dressID, newPrice);
   }
 
   //Delete (delete dress)

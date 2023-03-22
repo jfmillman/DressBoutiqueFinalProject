@@ -41,10 +41,10 @@ public class DefaultDressService implements DressService{
 
   //Put (update) dress
   @Override
-  public Optional<Dress> updateDressPrice(String dressID, String dressStyle, BigDecimal newPrice) {
-   log.info("The updateDressPrice method was called with dressID={}, dressStyle={}, newPrice={}", dressID, dressStyle, newPrice);
+  public Optional<Dress> updateDressPrice(String dressID, Dress newPrice) {
+   log.info("The updateDressPrice method was called with dressID={}, price={}", dressID, newPrice);
    
-   return dressDao.updateDressPrice(dressID, dressStyle, newPrice);
+   return dressDao.updateDressPrice(dressID, newPrice);
   }
 
   //Delete Dress

@@ -21,7 +21,9 @@ public interface DressService {
    */
   Optional<Dress> createDress(String dressID, String dressStyle, BigDecimal price);
   
-  Optional<Dress> updateDressPrice(String dressID, String dressStyle, BigDecimal newPrice);
+  Optional<Dress> updateDressPrice(String dressID, Dress newPrice);
 
   Optional<Dress> deleteDress(Long dressPK);
+
+
 }

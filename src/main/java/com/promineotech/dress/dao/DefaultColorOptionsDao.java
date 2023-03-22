@@ -30,7 +30,8 @@ public class DefaultColorOptionsDao implements ColorOptionsDao{
     String sql = ""
         + "SELECT * "
         + "FROM color_options "
-        + "WHERE color_fk = :color_fk";
+    //    + "WHERE color_fk = :color_fk"
+        + "INNER JOIN Dress ON dress_pk";
     //@formatter:on
     
     Map<String, Object> params = new HashMap<>();
@@ -42,7 +43,7 @@ public class DefaultColorOptionsDao implements ColorOptionsDao{
       public Color_Options mapRow(ResultSet rs, int rowNum) throws SQLException {
         //@formatter:off
         return Color_Options.builder()
-            .colorPK (rs.getLong("color_fk"))
+            .colorPK (rs.getLong("color_pk"))
             .build();
       } } );
       
