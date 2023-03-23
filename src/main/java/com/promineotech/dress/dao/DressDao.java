@@ -27,14 +27,14 @@ public interface DressDao {
    * @param price
    * @return
    */
-  Optional<Dress> createDress(String dressID, String dressStyle, BigDecimal price);
+  Optional<Dress> createDress(String dressID, String dressStyle, BigDecimal price, Long customerFk);
 
   /**
    * @param dressID
    * @param dressStyle
    * @return
    */
-  Optional<Dress> updateDressPrice(String dressID, Dress newPrice);
+  Optional<Dress> updateDressPrice(String dressID, BigDecimal price);
 
   /**
    * @param dressPK

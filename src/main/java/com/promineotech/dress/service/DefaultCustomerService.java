@@ -19,6 +19,7 @@ public class DefaultCustomerService implements CustomerService {
   private CustomerDao customerDao;
   
   //Read customers
+  //Applied a transactional annotation for read only bc nothing will change
   @Transactional(readOnly = true)
   @Override
   public List<Customers> fetchCustomers(String firstName) {

@@ -13,5 +13,5 @@ import com.promineotech.dress.entity.Color_Options;
  */
 public interface ColorOptionsService {
 
-  List<Color_Options> fetchColors(Long colorPK);
+  List<Color_Options> fetchColors(Long dressFk);
 }

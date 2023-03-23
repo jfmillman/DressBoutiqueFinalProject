@@ -13,6 +13,6 @@ import com.promineotech.dress.entity.Color_Options;
 public interface ColorOptionsDao {
 
 //Method to read colors from the color options table
-  List<Color_Options> fetchColors(Long colorPK);
+  List<Color_Options> fetchColors(Long dressFk);
 
 }

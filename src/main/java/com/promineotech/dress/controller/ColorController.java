@@ -59,6 +59,7 @@ public interface ColorController {
               content = @Content(
                   mediaType = "application/json")) },
  
+  //the parameters
   parameters = {
       @Parameter(
           name = "colorPK", 

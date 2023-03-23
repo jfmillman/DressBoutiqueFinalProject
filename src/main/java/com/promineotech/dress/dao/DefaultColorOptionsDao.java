@@ -23,27 +23,30 @@ public class DefaultColorOptionsDao implements ColorOptionsDao{
   private NamedParameterJdbcTemplate jdbcTemplate;
 
   //Get method to read the list of colors
-  public List<Color_Options> fetchColors(Long colorPK) {
-    log.info("DAO: colorPK={}", colorPK);
+  public List<Color_Options> fetchColors(Long dressFk) {
+    log.info("DAO: dressFk={}", dressFk);
     
+    //SQL statement
     //@formatter:off
     String sql = ""
         + "SELECT * "
         + "FROM color_options "
-    //    + "WHERE color_fk = :color_fk"
-        + "INNER JOIN Dress ON dress_pk";
+        + "WHERE dress_fk = :dress_fk";
     //@formatter:on
     
+  //prepared statement
     Map<String, Object> params = new HashMap<>();
-    params.put("color_fk", colorPK.toString());
+    params.put("dress_fk", dressFk.toString()); 
     
     return jdbcTemplate.query(sql, params, new RowMapper<>() {
       
       @Override
       public Color_Options mapRow(ResultSet rs, int rowNum) throws SQLException {
+      //this builds the color_options info
         //@formatter:off
         return Color_Options.builder()
-            .colorPK (rs.getLong("color_pk"))
+            .colorFk (rs.getLong("color_fk"))
+            .dressFk(rs.getLong("dress_fk"))
             .build();
       } } );
       

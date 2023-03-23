@@ -15,5 +15,6 @@ public class Dress {
   private String dressId;
   private String dressStyle;
   private BigDecimal price;
+  private Long customerFk;
 
 }

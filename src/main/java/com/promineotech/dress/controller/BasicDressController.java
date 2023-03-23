@@ -15,9 +15,11 @@ import lombok.extern.slf4j.Slf4j;
 //This class is controller class that tells spring to marshal and unmarshal JSON to Java.
 
 @RestController
+//This means we can log something
 @Slf4j
 public class BasicDressController implements DressController {
 
+//Tells Spring that we want an object to be injected here
   @Autowired
   private DressService dressService;
 
@@ -31,18 +33,18 @@ public class BasicDressController implements DressController {
   
   //Post (create dress)
   @Override
-  public Optional<Dress> createDress(String dressID, String dressStyle, BigDecimal price) {
-    log.info("dressID={}, dressStyle={}, price={}", dressID, dressStyle, price);
+  public Optional<Dress> createDress(String dressID, String dressStyle, BigDecimal price, Long customerFk) {
+    log.info("dressID={}, dressStyle={}, price={}, customerFk={}", dressID, dressStyle, price, customerFk);
     
-    return dressService.createDress(dressID, dressStyle, price);
+    return dressService.createDress(dressID, dressStyle, price, customerFk);
   }
 
   //Put (update dress price)
   @Override
-  public Optional<Dress> updateDressPrice(String dressID, Dress newPrice) {
-    log.info("dressID={}, newPrice={}", dressID, newPrice);
+  public Optional<Dress> updateDressPrice(String dressID, BigDecimal price) {
+    log.info("dressID={}, price={}", dressID, price);
     
-    return dressService.updateDressPrice(dressID, newPrice);
+    return dressService.updateDressPrice(dressID, price);
   }
 
   //Delete (delete dress)

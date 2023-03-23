@@ -27,6 +27,7 @@ public class DefaultColorDao implements ColorDao {
   public List<Color> fetchListOfColors(Long colorPK) {
     log.info("DAO: colorPK={}", colorPK);
     
+    //SQL statement
     //@formatter:off
     String sql = ""
         + "SELECT * "
@@ -35,6 +36,7 @@ public class DefaultColorDao implements ColorDao {
         
     //@formatter:on
     
+    //prepared statement
     Map<String, Object> params = new HashMap<>();
     params.put("color_pk", colorPK.toString());
     
@@ -42,6 +44,7 @@ public class DefaultColorDao implements ColorDao {
       
       @Override
       public Color mapRow(ResultSet rs, int rowNum) throws SQLException {
+        //this builds the color info
         //@formatter:off
         return Color.builder()
             .colorPK(rs.getLong("color_pk"))

@@ -19,10 +19,11 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @Slf4j
 public class DefaultDressService implements DressService{
-  
+  //automatic dependency injection 
   @Autowired DressDao dressDao;
   
   //Get Dress
+  //Applied a transactional annotation for read only bc nothing will change
   @Transactional(readOnly=true)
   @Override
   public List<Dress> fetchDress(String dressStyle) {
@@ -32,22 +33,26 @@ public class DefaultDressService implements DressService{
   }
 
   //Post (create) Dress
+  //No @Transactional here
   @Override
-  public Optional<Dress> createDress(String dressID, String dressStyle, BigDecimal price) {
-    log.info("The createDress method was called with dressID={}, dressStyle={}, price={}", dressID, dressStyle, price);
+  public Optional<Dress> createDress(String dressID, String dressStyle, BigDecimal price, Long customerFk) {
+    log.info("The createDress method was called with dressID={}, dressStyle={}, price={}, customerFk={}", dressID, dressStyle, price, customerFk);
     
-    return dressDao.createDress(dressID, dressStyle, price);
+    return dressDao.createDress(dressID, dressStyle, price, customerFk);
   }
 
   //Put (update) dress
+  //No @Transactional here
   @Override
-  public Optional<Dress> updateDressPrice(String dressID, Dress newPrice) {
-   log.info("The updateDressPrice method was called with dressID={}, price={}", dressID, newPrice);
+  public Optional<Dress> updateDressPrice(String dressID, BigDecimal price) {
+   log.info("The updateDressPrice method was called with dressID={}, price={}", dressID, price);
    
-   return dressDao.updateDressPrice(dressID, newPrice);
+   return dressDao.updateDressPrice(dressID, price);
+   
   }
 
   //Delete Dress
+  //No @Transactional here
   @Override
   public Optional<Dress> deleteDress(Long dressPK) {
     

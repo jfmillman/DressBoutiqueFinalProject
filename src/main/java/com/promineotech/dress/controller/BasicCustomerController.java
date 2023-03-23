@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class BasicCustomerController implements CustomerController {
   
+//Tells Spring that we want an object to be injected here
   @Autowired
   private CustomerService customerService;
   

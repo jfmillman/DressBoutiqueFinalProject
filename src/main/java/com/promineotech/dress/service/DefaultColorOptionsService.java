@@ -20,12 +20,13 @@ public class DefaultColorOptionsService implements ColorOptionsService {
   private ColorOptionsDao colorOptionsDao;
 
 //Get (read colors)
+// Applied a transactional annotation for read only bc nothing will change
 @Transactional(readOnly=true)
 @Override
-  public List<Color_Options> fetchColors(Long colorPK) {
-    log.info("The fetchColors method was called with colorPK={}", colorPK);
+  public List<Color_Options> fetchColors(Long dressFk) {
+    log.info("The fetchColors method was called with dressFk={}", dressFk);
     
-    return colorOptionsDao.fetchColors(colorPK);
+    return colorOptionsDao.fetchColors(dressFk);
   }
 
 }

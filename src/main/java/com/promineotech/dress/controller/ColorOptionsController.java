@@ -32,7 +32,7 @@ public interface ColorOptionsController {
 //500 = unplanned exception
   @Operation(
       summary = "Returns a list of color options",
-      description = "Returns a list of colors given an optional dressPK",
+      description = "Returns a list of colors given an optional dressFk",
       responses = {
           @ApiResponse(
               responseCode = "200", 
@@ -58,10 +58,10 @@ public interface ColorOptionsController {
  
       parameters = {
           @Parameter(
-              name = "dressPK", 
+              name = "dressFk", 
               allowEmptyValue = false, 
               required = false, 
-              description = "The dressPK (i.e., '4')"), 
+              description = "The dressFk (i.e., '4')"), 
      }
   )
   //@formatter:on
@@ -71,6 +71,6 @@ public interface ColorOptionsController {
   @ResponseStatus(code = HttpStatus.OK)
   List<Color_Options> fetchColors(
       @RequestParam(required = false)
-      Long dressPK);
+      Long dressFk);
  
 }

@@ -27,6 +27,7 @@ public class DefaultCustomerDao implements CustomerDao {
   public List<Customers> fetchCustomers (String firstName) {
     log.info("DAO: firstName={}", firstName);
     
+    //Sql statement
     //@formatter:off
     String sql =""
         + "SELECT * "
@@ -34,6 +35,7 @@ public class DefaultCustomerDao implements CustomerDao {
         + "WHERE first_name = :first_name";
     //@formatter:on
     
+    //prepared statement
     Map<String, Object> params = new HashMap<>();
     params.put("first_name", firstName);
     

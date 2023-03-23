@@ -19,6 +19,7 @@ public class DefaultColorService implements ColorService {
   private ColorDao colorDao;
   
 //Get (read colors)
+//Applied a transactional annotation for read only bc nothing will change
 @Transactional(readOnly=true)
 @Override
   public List<Color> fetchListOfColors(Long colorPK) {

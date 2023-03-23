@@ -14,8 +14,9 @@ import lombok.Data;
 @Builder
 public class Color_Options {
 
-  Dress dressPK;
-  Color colorPK;
+
+  Long colorFk;
+  Long dressFk;
 
   
 }

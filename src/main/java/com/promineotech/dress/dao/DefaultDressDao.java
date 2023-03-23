@@ -29,6 +29,7 @@ public class DefaultDressDao implements DressDao{
   public List<Dress> fetchDress(String dressStyle) {
     log.info("DAO: dressStyle={}", dressStyle);
     
+    //sql statement
     //@formatter:off
     String sql = ""
         + "SELECT * "
@@ -36,6 +37,7 @@ public class DefaultDressDao implements DressDao{
         + "WHERE dress_style = :dress_style";
     //@formatter:on
     
+    //prepared statement
     Map<String, Object> params = new HashMap<> ();
     params.put("dress_style", dressStyle);
 
@@ -59,8 +61,8 @@ public class DefaultDressDao implements DressDao{
 
   //Post method to create a new dress
   @Override
-  public Optional<Dress> createDress(String dressID, String dressStyle, BigDecimal price) {
-    log.info("DAO: dressID={}, dressStyle={}, price={}", dressID, dressStyle, price);
+  public Optional<Dress> createDress(String dressID, String dressStyle, BigDecimal price, Long customerFk) {
+    log.info("DAO: dressID={}, dressStyle={}, price={}, customerFk={}", dressID, dressStyle, price, customerFk);
     
     //@formatter:off
     String sql = ""
@@ -74,6 +76,8 @@ public class DefaultDressDao implements DressDao{
     params.put("dress_id", dressID);
     params.put("dress_style", dressStyle);
     params.put("price", price);
+    params.put("customer_fk", customerFk);
+    
     
   
     
@@ -83,8 +87,8 @@ public class DefaultDressDao implements DressDao{
 
   //Put method for updating the dress price
   @Override
-  public Optional<Dress> updateDressPrice(String dressID, Dress newPrice) {
-    log.info("DAO: dressID={}, price{}", dressID, newPrice);
+  public Optional<Dress> updateDressPrice(String dressID, BigDecimal price) {
+    log.info("DAO: dressID={}, price{}", dressID, price);
     
     //formatter:off
     String sql = ""
@@ -94,10 +98,13 @@ public class DefaultDressDao implements DressDao{
     
     Map<String, Object> params = new HashMap<>();
     params.put("dress_id", dressID);
-    params.put("new_price", newPrice);
+    params.put("price", price);
     
     jdbcTemplate.update(sql, params);
-    return Optional.ofNullable(Dress.builder().dressId(dressID).price(newPrice).build());
+    return Optional.ofNullable(Dress.builder()
+        .dressId(dressID)
+        .price(price)
+        .build());
   }
 
   //Delete method to delete a dress
@@ -112,10 +119,12 @@ public class DefaultDressDao implements DressDao{
     Map <String, Object> params = new HashMap<>();
     params.put("dress_pk", dressPK);
     
-    jdbcTemplate.update(sql, params); //returns number of rows affected
+    jdbcTemplate.update(sql, params); 
     
-    //throw an exception here so if deleted value is re-deleted it will throw an error
-    return Optional.ofNullable(Dress.builder().dressPK(dressPK).build());
+    //shows the dressPK that was deleted
+    return Optional.ofNullable(Dress.builder()
+        .dressPK(dressPK)
+        .build());
   }
 
 }

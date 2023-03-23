@@ -26,7 +26,7 @@ import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.servers.Server;
 
 @Validated
-//any URI that comes in with /customers after port number will get mapped to this class
+//any URI that comes in with /dress after port number will get mapped to this class
 @RequestMapping ("/Dress")
 @OpenAPIDefinition(info = @Info(title = "Dress Boutique Dress Service"), servers = {
   @Server(url = "http://localhost:8080", description = "Localserver.")})
@@ -64,6 +64,7 @@ public interface DressController {
               content = @Content(
                   mediaType = "application/json")) },
  
+      //the parameters
       parameters = {
           @Parameter(
               name = "dressStyle", 
@@ -82,13 +83,13 @@ public interface DressController {
       String dressStyle);
     
   
-  
+  //201 status rather than 200 status to create the dress
   @Operation(
       summary = "Create a new dress",
-      description = "Create a dress using the required dressID, dressStyle, and price",
+      description = "Create a dress using the required dressID, dressStyle, price, and customerFk",
       responses = {
           @ApiResponse(
-              responseCode = "200", 
+              responseCode = "201", 
               description = "A dress is created.", 
               content = @Content(
                   mediaType = "application/json", 
@@ -124,7 +125,12 @@ public interface DressController {
               name = "price",
               allowEmptyValue = false,
               required = true,
-              description = "The price (i.e., '100.00')") 
+              description = "The price (i.e., '100.00')"),
+          @Parameter(
+              name = "customerFk",
+              allowEmptyValue = false,
+              required = true,
+              description = "The customerFk (i.e., '6')") 
      }
   )
   //@formatter:on
@@ -138,11 +144,13 @@ public interface DressController {
       @RequestParam (required = true)
       String dressStyle,
       @RequestParam (required = true)
-      BigDecimal price);
+      BigDecimal price,
+      @RequestParam (required = true)
+      Long customerFk);
   
   @Operation(
       summary = "Update the price of a dress",
-      description = "Update the price of a dress using the required dressID and dressStyle",
+      description = "Update the price of a dress using the required dressID",
       responses = {
           @ApiResponse(
               responseCode = "200", 
@@ -184,7 +192,7 @@ public interface DressController {
       @RequestParam (required = true)
       String dressID,
       @RequestParam (required = false)
-      Dress newPrice);
+      BigDecimal price);
   
   @Operation(
       summary = "Delete a dress",

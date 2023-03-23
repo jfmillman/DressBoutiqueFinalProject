@@ -15,15 +15,16 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class BasicColorOptionsController implements ColorOptionsController {
 
+//Tells Spring that we want an object to be injected here
   @Autowired
   private ColorOptionsService colorOptionsService;
   
   //fetchColors will read the list of colors
   @Override
-  public List<Color_Options> fetchColors(Long dressPK) {
-    log.info("dressPK={}", dressPK);
+  public List<Color_Options> fetchColors(Long dressFk) {
+    log.info("dressFk={}", dressFk);
     
-    return colorOptionsService.fetchColors(dressPK);
+    return colorOptionsService.fetchColors(dressFk);
   }
 
 }
